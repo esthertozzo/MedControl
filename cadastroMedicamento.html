@@ -86,22 +86,22 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Medicamentos</a>
+                        <a class="nav-link" aria-current="page" href="/#medicamentos">Medicamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#pacientes">Pacientes</a>
+                        <a class="nav-link" href="/#pacientes">Pacientes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link disabled" aria-disabled="true">Vendas</a>
+                        <a class="nav-link disabled" aria-disabled="true" href="/#vendas">Vendas</a>
                     </li>
                 </ul>
                 <div class="form-check form-switch me-3 mt-1">
                     <input class="form-check-input" type="checkbox" id="theme-toggle">
                     <label for="form-check-label" for="theme-toggle"></label>
                 </div>
-                <form class="d-flex" role="search">
-                    <input class="form-control rounded-0 rounded-start-2 border border-1" type="search"
-                        placeholder="Buscar medicamento por nome" aria-label="Search">
+                <form action="/buscarPaciente" method="get" class="d-flex" role="search">
+                    <input id="nome" name="nome" class="form-control rounded-0 rounded-start-2 border border-1" type="search"
+                        placeholder="Buscar Paciente" aria-label="Search">
                     <button class="btn rounded-0 rounded-end-2" type="submit">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                             class="bi bi-search mb-1" viewBox="0 0 16 16">
@@ -123,16 +123,16 @@
                     <div class="form-group">
                         <input
                             class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="text" id="nome" name="nome" placeholder="Digite o nome do paciente" required><br>
+                            type="text" id="nome" name="nome" placeholder="Digite o nome do medicamento" required><br>
 
                         <input
                             class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="text" id="data_nascimento" name="data_nascimento"
-                            placeholder="Digite a data de nascimento do paciente" required><br>
+                            type="text" id="codigo_registro" name="codigo_registro" maxlength="13"
+                            placeholder="Digite o Código de Registro do medicamento" required><br>
 
                         <input
                             class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="text" id="cpf" name="cpf" placeholder="Digite o CPF do paciente" required><br>
+                            type="text" id="dosagem" name="dosagem" placeholder="Digite a dosagem (em mg) do medicamento" required><br>
 
                         <button type="submit" class="btn border border-0 p-3 mb-2">Cadastrar</button>
                     </div>

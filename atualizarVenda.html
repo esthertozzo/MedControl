@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar Paciente</title>
+    <title>Atualizar Venda</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
@@ -71,10 +70,9 @@
         body.dark-mode .navbar .navbar-toggler {
             background-color: white;
         }
-      
+        
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg p-4 fixed-top">
         <div class="container-fluid">
@@ -100,40 +98,47 @@
                     <input class="form-check-input" type="checkbox" id="theme-toggle">
                     <label for="form-check-label" for="theme-toggle"></label>
                 </div>
-                <form action="/buscarPaciente" method="get" class="d-flex" role="search">
-                    <input id="nome" name="nome" class="form-control rounded-0 rounded-start-2 border border-1" type="search"
-                        placeholder="Buscar Paciente" aria-label="Search">
-                    <button class="btn rounded-0 rounded-end-2" type="submit">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
-                            class="bi bi-search mb-1" viewBox="0 0 16 16">
-                            <path
-                                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                        </svg>
-                    </button>
-                </form>
             </div>
         </div>
     </nav>
+
 
     <main>
         <div class="section_main1 d-flex align-items-center p-5">
             <img src="img/cadastrarPacientes.svg" alt="..." class="..." style="width: 30%;">
             <div class="text-banner flex-grow-1 ms-3 ">
-                <form action="/cadastroPaciente" method="POST" class="ms-5 mt-5 me-5">
-                    <h2 class="mt-5 display-6">Cadastrar novo <span>Paciente</span>.</h2><br>
+                <form action="/atualizarVenda" method="POST" class="ms-5 mt-5 me-5">
+                    <h2 class="mt-5 display-6">Atualizar <span>Venda</span>.</h2><br>
+                    <input type="hidden" id="id" name="id">
                     <div class="form-group">
+                        <label for="dataVenda">Data de Venda:</label>
                         <input
-                            class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="text" id="nome" name="nome" placeholder="Digite o nome do paciente" required><br>
+                            class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark" type="text" id="dataVenda" name="dataVenda" required><br>
 
+                        <label for="nomePaciente">Nome do Paciente:</label>
                         <input
                             class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="date" id="data_nascimento" name="data_nascimento"
-                            placeholder="Digite a data de nascimento do paciente" required><br>
+                            type="text" id="nomePaciente" name="nomePaciente"required><br>
 
+                        <label for="cpfPaciente">CPF do Paciente:</label>
                         <input
                             class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
-                            type="text" id="cpf" name="cpf" maxlength="11" placeholder="Digite o CPF do paciente" required><br>
+                            type="text" id="cpfPaciente" name="cpfPaciente" required><br>
+
+                            <label for="codigo_registro_med">Código de Registro do medicamento:</label>
+                            <input
+                                class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
+                                type="text" id="codigo_registro_med" name="codigo_registro_med" required><br>
+
+                                <label for="nomeMed">Nome do medicamento:</label>
+                            <input
+                                class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
+                                type="text" id="nomeMed" name="nomeMed" required><br>
+
+                                <label for="qtd">Quantidade do medicamento vendida:</label>
+                            <input
+                                class="form-control border border-secondary border-opacity-50 p-3 mb-2 bg-transparent text-dark"
+                                type="text" id="qtd" name="qtd" required><br>
 
                         <button type="submit" class="btn border border-0 p-3 mb-2">Cadastrar</button>
                     </div>
@@ -143,31 +148,52 @@
         </div>
     </main>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vendaId = urlParams.get('id');
+
+            if (vendaId) {
+                fetch(`/venda/${vendaId}`)
+                    .then(response => response.json())
+                    .then(venda => {
+                        document.getElementById('id').value = venda._id;
+                        document.getElementById('dataVenda').value = venda.dataVenda;
+                        document.getElementById('nomePaciente').value = venda.nomePaciente;
+                        document.getElementById('cpfPaciente').value = venda.cpfPaciente;
+                        document.getElementById('codigo_registro_med').value = venda.codigo_registro_med;
+                        document.getElementById('nomeMed').value = venda.nomeMed;
+                        document.getElementById('qtd').value = venda.qtd
+                    })
+                    .catch(error => console.error('Erro ao carregar dados da venda:', error));
+            }
+        });
+    </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-        </script>
-         <script>
-            document.addEventListener('DOMContentLoaded', function(){
-                const toggleSwitch = document.getElementById('theme-toggle');
-                const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
+     <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            const toggleSwitch = document.getElementById('theme-toggle');
+            const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+        
+            if(isDarkMode){
+                document.body.classList.add('dark-mode');
+                toggleSwitch.checked = true;
+            }
             
-                if(isDarkMode){
+            toggleSwitch.addEventListener('change', function(){
+                if(toggleSwitch.checked){
                     document.body.classList.add('dark-mode');
-                    toggleSwitch.checked = true;
+                    localStorage.setItem('dark-mode', 'true');
+                }else{
+                    document.body.classList.remove('dark-mode');
+                    localStorage.setItem('dark-mode', 'false');
                 }
-                
-                toggleSwitch.addEventListener('change', function(){
-                    if(toggleSwitch.checked){
-                        document.body.classList.add('dark-mode');
-                        localStorage.setItem('dark-mode', 'true');
-                    }else{
-                        document.body.classList.remove('dark-mode');
-                        localStorage.setItem('dark-mode', 'false');
-                    }
-                });
             });
-                </script>
+        });
+            </script>
 </body>
-
 </html>
+                                                                             

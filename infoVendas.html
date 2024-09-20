@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body.dark-mode {
+            background-color: #1e1e1e;
+            color: white;
+        }
+
+        body.dark-mode .container {
+            background-color: #1e1e1e;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--wine03);
+            border-color: var(--wine03);
+        }
+
+        .form-check-input:hover {
+            cursor: pointer;
+        }
+
+        body.dark-mode .navbar {
+            background-color: #2c2c2c;
+        }
+
+        body.dark-mode .navbar .nav-link {
+            color: white;
+        }
+
+        body.dark-mode p {
+            color: white;
+        }
+
+        body.dark-mode .card-title1 {
+            color: white;
+        }
+
+        body.dark-mode .card-title {
+            color: white;
+        }
+
+        body.dark-mode hr {
+            color: white;
+        }
+
+        body.dark-mode .navbar .navbar-brand {
+            color: white;
+        }
+
+        body.dark-mode .navbar .navbar-brand span {
+            color: var(--wine04);
+        }
+
+        body.dark-mode .navbar .btn {
+            background-color: var(--wine04);
+        }
+
+        body.dark-mode .navbar .form-check-input:checked {
+            background-color: var(--wine04);
+            border-color: var(--wine04);
+        }
+
+        body.dark-mode .navbar .navbar-toggler {
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h2 class="text-center">Detalhes das vendas</h2>
+                        <table class="table table-bordered table-light text-center">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Data da Venda</th>
+                                    <th>Nome do Paciente</th>
+                                    <th>CPF do Paciente</th>
+                                    <th>Código de Registro Medicamento</th>
+                                    <th>Nome do Medicamento</th>
+                                    <th>Quantidade Vendida</th>
+                                    <th>editar-deletar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="vendas-tabela">
+                                <!-- As vendas serão inseridos aqui pelo JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('/vendas')
+                .then(response => response.json())
+                .then(vendas => {
+                    const tabela = document.getElementById('vendas-tabela');
+                    tabela.innerHTML = vendas.map(venda => `
+                        <tr>
+                            <td>${venda.dataVenda}</td>
+                            <td>${venda.nomePaciente}</td>
+                            <td>${venda.cpfPaciente}</td>
+                            <td>${venda.codigo_registro_med}</td>
+                            <td>${venda.nomeMed}</td>
+                            <td>${venda.qtd}</td>
+                            <td>
+                                <div>
+                            <a href="/atualizarVenda?id=${venda._id}" class="btn_card btn btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="icon bi bi-arrow-clockwise " viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+                                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+                              </svg>
+                            </a> 
+                            <form action="/deletarVenda" method="post" onsubmit="return confirm('Tem certeza que deseja excluir a Venda?');" style="display:inline;">
+            <input type="hidden" name="id" value="${venda._id}">
+            <button type="submit" class="btn_card btn btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="icon bi bi-trash-fill" viewBox="0 0 16 16">
+                                <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0"/>
+                              </svg>
+                            </button>
+        </form>
+                            
+                        </div>
+                                </div>
+                            </td>
+                        </tr>
+                    `).join('');
+                })
+                .catch(error => console.error('Erro ao carregar vendas:', error));
+        });
+    </script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+</script>
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+       const toggleSwitch = document.getElementById('theme-toggle');
+       const isDarkMode = localStorage.getItem('dark-mode') === 'true';
+
+       if (isDarkMode) {
+           document.body.classList.add('dark-mode');
+           toggleSwitch.checked = true;
+       }
+
+       toggleSwitch.addEventListener('change', function () {
+           if (toggleSwitch.checked) {
+               document.body.classList.add('dark-mode');
+               localStorage.setItem('dark-mode', 'true');
+           } else {
+               document.body.classList.remove('dark-mode');
+               localStorage.setItem('dark-mode', 'false');
+           }
+       });
+   });
+</script>
+</body>
+</html>

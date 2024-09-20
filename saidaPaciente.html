@@ -86,7 +86,7 @@
             <div class="collapse navbar-collapse" id="navbarScroll">
                 <ul class="navbar-nav mx-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/#medicamentos">Medicamentos</a>
+                        <a class="nav-link" href="/#medicamentos">Medicamentos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/#pacientes">Pacientes</a>
@@ -99,7 +99,7 @@
                     <input class="form-check-input" type="checkbox" id="theme-toggle">
                     <label for="form-check-label" for="theme-toggle"></label>
                 </div>
-                <form action="/pacientes/buscar" method="get" class="d-flex" role="search">
+                <form action="/buscarPaciente" method="get" class="d-flex" role="search">
                     <input id="nome" name="nome" class="form-control rounded-0 rounded-start-2 border border-1" type="search"
                         placeholder="Buscar Paciente" aria-label="Search">
                     <button class="btn rounded-0 rounded-end-2" type="submit">
@@ -120,8 +120,8 @@
             <!-- exibir cards de pacientes -->
             {{saidaPaciente}}
         </div>
-        <button type="submit" class="btn border border-0 p-3 mb-2">+ info</button>
-    </div>
+        <a href="/infoPacientes"><button type="submit" class="btn border border-0 p-3 mb-2">+ info</button></a>
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
