@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+:root{
+    --wine01: #3F1427;
+    --wine02: #491B31;
+    --wine03: #582640;
+    --wine04: #6D3556;
+    --wine05: #b86194;
+    --gallery00: #837f81;
+    --gallery01: #A39D9F;
+    --gallery02: #C7C3C4;
+    --gallery03: #EDEAEB;
+    --gallery04: #f7f6f6;
+}
+*{
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+body{
+    background: var(--gallery03);
+}
+.navbar{
+    background: var(--gallery04)
+}
+.btn{
+    background: var(--wine03);
+    color: white;
+}
+.btn:hover{
+    background: var(--wine04);
+    color: white;
+}
+i{
+    color: white;
+}
+span{
+    color: var(--wine04);
+    font-weight: 1000;
+}
+.nav-item{
+    font-weight: 600;
+}
+.form-check{
+    font-size: 20px
+}
+
+.paciente-inner-box img{
+    box-shadow: 0 33px 61px -29px rgb(0 0 0 / 26%);
+    height: 350px;
+    width: 100%;
+    object-fit: cover;
+}
+.paciente-box.is-hover{
+    transform: rotateY(-3%);
+    top: 3%;
+    opacity: 1;
+}
+.cart-btn{
+    position: absolute;
+    bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+.img-banner{
+    width: 48%;
+    margin-right: 4%;
+}
+.section_main{
+    margin-top: 18%;
+}
+.btn_card{
+    background-color: var(--gallery00);
+}
+.card{
+    border-radius: 10px;
+}
+.cadastro{
+    text-decoration: none;
+    color: var(--gallery00);
+}
+.cadastro:hover{
+    text-decoration: none;
+    color: var(--wine01);
+}
+.section_main1{
+    margin-top: 10%;
+}
+.card-title1{
+    font-size: 12px !important;
+    color: var(--wine03);
+}
+.dt_nascimento{
+    color: var(--wine03);
+    font-size: 14px !important;
+}
+.container1{
+    margin-top: 10%;
+    width: 90%;
+}
